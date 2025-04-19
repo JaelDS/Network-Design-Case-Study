@@ -622,26 +622,16 @@ ping -f -l 1500 [target_ip]  # On Windows
 
 ## 5. References
 
-Broadhurst, P. (2022). *Cisco network security troubleshooting handbook: A practical guide for security operations on Cisco networks* (1st ed.). Packt Publishing.
-
-Cisco Systems, Inc. (2023). *Cisco ASA Series CLI configuration guide, 9.16: Testing and monitoring security policies*. https://www.cisco.com/c/en/us/td/docs/security/asa/asa916/configuration/general/asa-916-general-config/monitor-test.html
-
-Cisco Systems, Inc. (2022). *Port Security Configuration Guide, Cisco IOS Release 15M&T: Configuring port security*. https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_psecure/configuration/15-mt/sec-data-psecure-15-mt-book/sec-port-sec.html
-
 Herzog, P. (2021). *OSSTMM 3 – The Open Source Security Testing Methodology Manual: Contemporary security testing and analysis*. ISECOM. https://www.isecom.org/OSSTMM.3.pdf
-
-Hucaby, D. (2022). *CCNP and CCIE Security core SCOR 350-701 official cert guide* (1st ed.). Cisco Press.
 
 Kent, K., & Souppaya, M. (2020). *Guide to computer security log management* (NIST Special Publication 800-92). National Institute of Standards and Technology. https://doi.org/10.6028/NIST.SP.800-92
 
 National Institute of Standards and Technology (NIST). (2021). *Technical guide to information security testing and assessment* (NIST Special Publication 800-115). https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-115.pdf
 
-Scarfone, K., Souppaya, M., Cody, A., & Orebaugh, A. (2022). *Technical guide to information security testing and assessment* (NIST Special Publication 800-115 Rev. 1, Draft). National Institute of Standards and Technology. https://csrc.nist.gov/publications/detail/sp/800-115/rev-1/draft
+Cisco Systems, Inc. (2023). Cisco IOS security command reference. https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/a1/sec-a1-cr-book.html
 
-Scarfone, K., & Mell, P. (2021). *Guide to intrusion detection and prevention systems* (NIST Special Publication 800-94 Rev. 1, Draft). National Institute of Standards and Technology. https://csrc.nist.gov/publications/detail/sp/800-94/rev-1/draft
+NIST. (2020). Security and privacy controls for information systems and organizations (NIST Special Publication 800-53, Rev. 5). https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf
 
-Stallings, W., & Brown, L. (2022). *Computer security: Principles and practice* (5th ed.). Pearson.
+NIST. (2018). Risk management framework for information systems and organizations (NIST Special Publication 800-37, Rev. 2). https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-37r2.pdf
 
-Vacca, J. R. (2021). *Network and system security* (3rd ed.). Syngress.
-
-Wheeler, E. (2023). *Security risk management: Building an information security risk management program from the ground up* (2nd ed.). Syngress.
+OWASP Foundation. (2023). Network security testing guide. https://owasp.org/www-project-web-security-testing-guide/
