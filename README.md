@@ -179,6 +179,8 @@ Security testing includes:
 5. **Vulnerability Assessment**: Evaluate protection against the five key threats
 6. **Performance Testing**: Measure impact of security controls on network performance
 
+![Testing Results](https://github.com/JaelDS/Network-Design-Case-Study/blob/main/network-security-testing.md)
+
 ## Future Enhancements
 
 Potential improvements include:
