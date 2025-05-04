@@ -56,7 +56,7 @@
 1. Click on PC3
 2. Go to Desktop > Command Prompt
 3. Verify connectivity:
-   ping 192.168.50.10
+   ping 192.168.50.10 ! Database server device
    (Should fail due to VLAN isolation)
 ```
 
