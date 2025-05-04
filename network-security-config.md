@@ -3,9 +3,9 @@
 
 <div align="center">
 
-[![Security](https://img.shields.io/badge/Security-Enterprise%20Grade-brightgreen.svg)](#)
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-blue.svg)](#)
-[![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg)](#)
+[![Security](https://img.shields.io/badge/Security-Educational%20Grade-8B7355.svg)](#)
+[![Status](https://img.shields.io/badge/Status-Under%20Review-7A6563.svg)](#)
+[![Version](https://img.shields.io/badge/Version-1.0.0-5B7C8D.svg)](#)
 
 </div>
 
@@ -182,11 +182,14 @@ graph TD
     C -->|Security Level 75| D[User Zones]
     C -->|Security Level 100| E[Database Zone]
     
-    style A fill:#ff6b6b,stroke:#333,stroke-width:2px
-    style B fill:#feca57,stroke:#333,stroke-width:2px
-    style C fill:#54a0ff,stroke:#333,stroke-width:2px
-    style D fill:#5f27cd,stroke:#333,stroke-width:2px
-    style E fill:#48dbfb,stroke:#333,stroke-width:2px
+    style A fill:#f85149,stroke:#1f2328,stroke-width:2px,color:#ffffff
+    style B fill:#d29922,stroke:#1f2328,stroke-width:2px,color:#ffffff
+    style C fill:#1f6feb,stroke:#1f2328,stroke-width:2px,color:#ffffff
+    style D fill:#8250df,stroke:#1f2328,stroke-width:2px,color:#ffffff
+    style E fill:#3fb950,stroke:#1f2328,stroke-width:2px,color:#ffffff
+    
+    classDef default font-size:16px
+    classDef edgeLabel fill:#30363d,stroke:#444c56,stroke-width:1px,color:#c9d1d9,padding:8px,font-size:14px
 ```
 
 ## 💻 Device Configurations
@@ -522,8 +525,8 @@ Network Performance:
 [@JaelDS](https://github.com/JaelDS) & [@cyrusmokua](https://github.com/cyrusmokua)  
 *Network Security Architects & Cyber Defense Engineers*
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Documentation](https://img.shields.io/badge/Docs-Complete-green.svg)](#)
-[![Security](https://img.shields.io/badge/Security-Hardened-red.svg)](#)
+[![License](https://img.shields.io/badge/License-Torrens%20University-8B6B5A.svg)](#)
+[![Docs](https://img.shields.io/badge/Docs-Complete-4A7C59.svg)](#)
+[![Security](https://img.shields.io/badge/Security-Hardened-8B5F65.svg)](#)
 
 </div>
