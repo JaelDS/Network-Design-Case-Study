@@ -36,12 +36,12 @@
 ```
 
 ### Required Access Credentials
-| Device | Username | Password | Enable Password |
-|--------|----------|----------|----------------|
-| Routers | admin | cisco123 | cisco123 |
-| Switches | admin | cisco123 | cisco123 |
-| ASA Firewall | admin | cisco123 | cisco123 |
-| AAA Server | admin | cisco123 | - |
+| Device | Username | Password | Enable Password | Console Password |
+|--------|----------|----------|----------------|-------------------|
+| Routers | admin | admin-password | cisco123 | ciscocon |
+| Switches | admin | admin-password | cisco123 | ciscocon |
+| ASA Firewall | admin | admin-password | cisco123 | ciscocon |
+| AAA Server | admin | admin-password | - | ciscocon |
 
 ---
 
@@ -707,7 +707,7 @@ debug ip dhcp snooping
 *Comprehensive validation for enterprise network protection*
 
 **Developed by**  
-Network Security Team
+@JaelDS & @cyrusmokua
 
 [![Documentation](https://img.shields.io/badge/Docs-Complete-green.svg)](#)
 [![Tests](https://img.shields.io/badge/Tests-Ready-blue.svg)](#)
