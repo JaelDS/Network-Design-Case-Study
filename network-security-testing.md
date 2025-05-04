@@ -63,23 +63,26 @@
 
 **Step 2: Create Complex PDU for Heartbleed Simulation**
 ```
-1. In Packet Tracer, click on "Add Complex PDU" (envelope with + icon)
+1. In Packet Tracer, click on "Add Complex PDU" (open envelope icon)
 2. Click on PC3 as source
 3. Click on Database Server as destination
-4. Configure PDU Settings:
-   - Sequence Number: 1
-   - One Shot Time: 0
-   
-5. Click "Advanced" tab
-6. Configure:
-   - Source Port: 55555
-   - Destination Port: 443
-   - Sequence Number: 1000
-   - TCP Flags: Check SYN
-   
-7. Under "PDU Details":
-   - Add custom data: "HEARTBEAT_REQUEST_OVERFLOW_64KB"
-   - This simulates oversized heartbeat request
+4. In the "Create Complex PDU" window:
+
+   Under "Source Settings":
+   - Source Device: PC3
+   - Outgoing Port: Auto Select Port (leave checked)
+
+   Under "PDU Settings":
+   - Select Application: HTTPS
+   - Destination Port: 443 (should auto-fill)
+   - Starting Source Port: 55555
+   - Size: 15000 (maximum allowed)
+
+   Under "Simulation Settings":
+   - Select "One Shot"
+   - Time: 0 seconds
+
+5. Click "Create PDU"
 ```
 
 **Step 3: Run Simulation and Track Packet**
