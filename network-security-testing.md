@@ -59,7 +59,7 @@
    ping 192.168.50.10 ! Database server device
    (Should fail due to VLAN isolation)
 ```
-<img src="testing/step1.png" height="60" alt="Torrens University"/>
+<img src="Testing/step1.png" height="450" alt="Step 1 Testing"/>
 
 **Step 2: Create Complex PDU for Heartbleed Simulation**
 ```
