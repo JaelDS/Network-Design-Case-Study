@@ -341,6 +341,44 @@ The security controls successfully blocked the simulated SQL injection attack, p
    50   Database                         active    Fa0/2
    60   Management                       active    Fa0/1
 ```
+**Validation 1: Switch0 vlan brief**
+```
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/3, Fa0/4, Fa0/5, Fa0/6
+                                                Fa0/7, Fa0/8, Fa0/9, Fa0/10
+                                                Fa0/11, Fa0/12, Fa0/13, Fa0/14
+                                                Fa0/15, Fa0/16, Fa0/17, Fa0/18
+                                                Fa0/19, Fa0/20, Fa0/21, Fa0/22
+                                                Fa0/23, Fa0/24, Gig0/1, Gig0/2
+50   Database                         active    Fa0/2
+60   Management                       active    Fa0/1
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active    
+```
+
+### Security Controls Validated
+1. **VLAN Isolation:** Database server is isolated in dedicated VLAN 50
+2. **Management Separation:** Management access is controlled via separate VLAN 60
+3. **Port Security:** Enabled with maximum 1 MAC address allowed
+4. **Sticky MAC Learning:** Database server MAC (00E0.8FD9.7A2D) securely bound to port
+5. **Violation Policy:** Shutdown mode automatically disables ports upon security violations
+
+### Test Status: PASSED
+The Layer 2 security controls have been properly implemented and are functioning as intended, providing foundation-level protection for the database environment.
+
+---
+
+## Overall Test Suite Conclusion
+
+All three security tests have successfully validated that the implemented network security controls are effective in protecting against:
+1. **Heartbleed vulnerability** through proper traffic inspection
+2. **SQL injection attacks** via network-level access controls
+3. **Unauthorized access** through VLAN isolation and port security
+
+The defense-in-depth approach implemented across multiple layers of the OSI model provides comprehensive protection against the targeted threats while maintaining network functionality.
 
 **Step 2: Verify Port Security**
 ```
@@ -350,6 +388,31 @@ The security controls successfully blocked the simulated SQL injection attack, p
    
 2. Note MAC address of Database server
 3. Document security settings
+```
+**Validation 2: Switch validation port security**
+
+```
+Port Security              : Enabled
+Port Status                : Secure-up
+Violation Mode             : Shutdown
+Aging Time                 : 0 mins
+Aging Type                 : Absolute
+SecureStatic Address Aging : Disabled
+Maximum MAC Addresses      : 1
+Total MAC Addresses        : 1
+Configured MAC Addresses   : 0
+Sticky MAC Addresses       : 1
+Last Source Address:Vlan   : 00E0.8FD9.7A2D:50
+Security Violation Count   : 0
+
+              Secure Mac Address Table
+-----------------------------------------------------------------------------
+Vlan    Mac Address       Type                          Ports   Remaining Age
+                                                                   (mins)
+----    -----------       ----                          -----   -------------
+  60    00D0.58E8.A502    SecureSticky                  Fa0/1        -
+  50    00E0.8FD9.7A2D    SecureSticky                  Fa0/2        -
+-----------------------------------------------------------------------------
 ```
 
 ---
@@ -387,6 +450,29 @@ The security controls successfully blocked the simulated SQL injection attack, p
 - Port enters err-disabled state
 - Security violation logged
 - Traffic from rogue device blocked
+
+## Test 3: Man-in-the-Middle Attack Prevention - Test Results
+
+### Test Execution Summary
+**Date:** [Current Date]  
+**Test Case:** Multi-layered MITM Protection Validation  
+**Status:** ✅ PASS - Security Controls Successfully Implemented
+
+### Key Security Controls Validated
+1. **Network Segmentation:** Unauthorized devices in the Database Zone cannot communicate with devices in User Access Zones
+2. **Port Security:** Configured to control device access based on MAC addresses
+3. **Traffic Isolation:** Failed network communication attempts between security zones demonstrates proper isolation
+
+### Test Evidence
+When an unauthorized device (PC6) was connected to Switch0 in the Database Zone and attempted to communicate with devices in the User Access Zone, all packets failed to reach their destination despite having network connectivity. This confirms that proper network segmentation and access controls are preventing unauthorized cross-zone communication.
+
+### Test Status: PASSED
+The multi-layered security architecture successfully prevents potential Man-in-the-Middle attacks by implementing network segmentation, port security, and traffic isolation. These controls work together to ensure devices cannot eavesdrop on traffic across security boundaries.
+
+
+<img src="Testing/simulation3.gif" height="450" alt="Simulation 3 Testing"/>
+
+<img src="Testing/simulation3a.gif" height="450" alt="Simulation 3a Testing"/>
 
 ### Test 3.2: DHCP Snooping Test
 
