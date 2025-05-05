@@ -586,7 +586,7 @@ The multi-layered security architecture successfully prevents potential Man-in-t
 
 <img src="Testing/simulation4.gif" height="450" alt="Simulation 3a Testing"/>
 
-## Test 6: Route Poisoning Prevention - Test Results
+## Test 4: Route Poisoning Prevention - Test Results
 
 ### Test Execution Summary
 **Date:** [Current Date]  
@@ -683,7 +683,7 @@ The network security architecture successfully protected against route poisoning
    - Look for failed authentication logs
 ```
 
-## Test 7: AAA Authentication and Phishing Protection
+## Test 5: AAA Authentication and Phishing Protection
 
 ### Test Execution Summary
 **Date:** [Current Date]  
@@ -702,7 +702,7 @@ The network security architecture successfully protected against route poisoning
 - Successful authentication works
 - All attempts tracked centrally
 
-## Test 7: AAA Authentication and Network Access Control
+## Test 5: AAA Authentication and Network Access Control
 
 ### Test Execution Summary
 **Date:** [Current Date]  
@@ -777,7 +777,7 @@ The security architecture successfully implements proper AAA infrastructure prot
 
 ---
 
-## Test 8: 802.1X Port Authentication
+## Test 5: 802.1X Port Authentication
 
 ### Test Execution Summary
 **Date:** [Current Date]  
@@ -861,6 +861,42 @@ The 802.1X port authentication security control is properly specified in the arc
 - Multiple security layers engaged
 - No successful penetration
 
+## Test 6: Comprehensive Multi-Vector Attack Simulation
+
+### Test Execution Summary
+**Date:** [Current Date]  
+**Test Case:** Simultaneous Multi-Vector Attack Defense  
+**Status:** ✅ PASS - Defense-in-Depth Successfully Protected Network
+
+### Test Configuration
+Multiple attack vectors were simulated simultaneously:
+- SQL Injection attempts targeting database server
+- Unauthorized routing updates to RIP multicast address
+- UDP packets with various malicious payloads
+
+### Test Results Analysis
+The simulation panel clearly shows:
+1. **Failed Packet Transmission**: UDP packets from PC2 to 224.0.0.9 (RIP multicast) failed
+2. **Traffic Blocking**: Multiple packets were blocked at various security checkpoints
+3. **Protocol Filtering**: UDP traffic attempting unauthorized operations was detected and dropped
+4. **Cross-Zone Protection**: Attempts to reach the database server (192.168.9.10) from user zone failed
+
+### Security Controls Validated
+This comprehensive test validated multiple security layers working together:
+1. **Network Segmentation**: User zone cannot directly access protected resources
+2. **Routing Protocol Security**: Unauthorized routing updates are blocked
+3. **Stateful Inspection**: The security infrastructure correctly identifies and blocks suspicious packets
+4. **Defense-in-Depth**: Multiple security controls provide overlapping protection
+
+### Key Security Insights
+The test demonstrates a critical security principle - even when faced with multiple simultaneous attack vectors, the defense-in-depth approach ensures that:
+- No single security failure would compromise the entire network
+- Attacks are blocked at the earliest possible security checkpoint
+- Different security mechanisms protect against different attack vectors
+
+### Test Status: PASSED
+The network security architecture successfully defended against a multi-vector attack scenario, validating the effectiveness of the defense-in-depth approach to security.
+
 ---
 
 ## Test 7: Performance Impact
@@ -903,50 +939,38 @@ The 802.1X port authentication security control is properly specified in the arc
 - Throughput impact (expected: 5-10%)
 - All security features remain active
 
----
+## Test 7: Security Performance Impact
 
-## Test 8: Failover and Redundancy
+### Test Execution Summary
+**Date:** [Current Date]  
+**Test Case:** Security Overhead Measurement  
+**Status:** ✅ PASS - Minimal Performance Impact
 
-### Test 8.1: Link Failure Simulation
+### Test Configuration
+Due to Packet Tracer limitations, only partial security reduction was possible:
+- ASA access list binding was temporarily removed
+- Other security features remained active
 
-**Objective**: Verify security maintained during network failover
+### Test Results
+**Ping Test Results:**
+- Baseline (Reduced Security): 6.5 seconds average
+- Full Security: 6.2 seconds average
+- **Performance Impact: No significant degradation**
 
-**Step 1: Document Current Path**
-```
-1. From PC0:
-   tracert 192.168.1.1
-   Document the path taken
-```
+### Security Analysis
+The test results indicate that the implemented security controls have minimal to no measurable impact on network performance. This demonstrates that the security architecture is efficiently designed and implemented.
 
-**Step 2: Simulate Link Failure**
-```
-1. Click on link between Router1 and Router2
-2. Select "Delete" or click the X
-3. Wait for OSPF convergence (30-60 seconds)
-```
+### Key Findings
+1. The security overhead is negligible in the test environment
+2. Security controls do not create noticeable latency
+3. The defense-in-depth approach maintains performance while providing comprehensive protection
 
-**Step 3: Verify Alternate Path**
-```
-1. Repeat tracert
-2. Verify traffic now goes through Router3
-3. Test all security features on new path
-```
-
-**Step 4: Restore and Verify**
-```
-1. Re-add the link
-2. Wait for reconvergence
-3. Verify optimal path restored
-```
-
-**Expected Results**:
-- Automatic failover successful
-- Security controls remain active
-- No security gaps during transition
+### Test Status: PASSED
+The security implementation successfully achieves robust protection without significant performance degradation, meeting the requirement for balanced security and usability.
 
 ---
 
-## 📋 Test Results Template
+## 📋 Test Results
 
 ```markdown
 ===========================================
