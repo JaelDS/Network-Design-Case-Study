@@ -476,7 +476,7 @@ The multi-layered security architecture successfully prevents potential Man-in-t
    - Subnet Mask: 255.255.255.0
 4. Turn ON DHCP service
 ```
-### Test Status: NOT SUPPORTED
+### Test Status: ❗NOT SUPPORTED
 > Configuration requires fixing to fit software limitations, because of this this test was not implemented.
 
 **Step 2: Test DHCP Snooping**
@@ -496,7 +496,7 @@ The multi-layered security architecture successfully prevents potential Man-in-t
 - Only trusted ports allow DHCP server messages
 - Legitimate DHCP continues to function
 
-### Test Status: NOT SUPPORTED
+### Test Status: ❗NOT SUPPORTED
 > Configuration requires fixing to fit software limitations, because of this this test was not implemented.
 
 ### Test 3.3: Dynamic ARP Inspection
@@ -528,7 +528,7 @@ The multi-layered security architecture successfully prevents potential Man-in-t
 - DAI statistics show drops
 - Legitimate ARP traffic continues
 
-### Test Status: NOT SUPPORTED
+### Test Status: ❗NOT SUPPORTED
 > Configuration requires fixing to fit software limitations, because of this this test was not implemented.
 
 ---
