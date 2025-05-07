@@ -971,7 +971,7 @@ footer {
   transition: color var(--transition-fast);
 }
 
-.footer-bottom span {
+.footer-bottom .text {
   color: var(--color-gray-light);
   transition: color var(--transition-fast);
 }
