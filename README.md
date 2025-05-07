@@ -3,7 +3,7 @@
 
 This repository contains the configuration files and implementation guidelines for a comprehensive network security solution designed to address five critical cybersecurity vulnerabilities.
 
-![Network Topology](https://github.com/JaelDS/Network-Design-Case-Study/blob/main/Resources/network_design_topology.png)
+![Network Topology](https://github.com/JaelDS/Network-Design-Case-Study/blob/main/Resources/Original.png)
 *Fig. 1: Network Security Topology*
 
 ## Table of Contents
