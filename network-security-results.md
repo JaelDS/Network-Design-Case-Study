@@ -364,3 +364,17 @@ The test demonstrates that:
 The network security architecture successfully protected against route poisoning attempts through properly configured access control lists that permit RIP updates only from authorized sources.
 
 ---
+
+<div align="center">
+
+### 🔒 Security Testing Protocol
+*Comprehensive validation for enterprise network protection*
+
+**Developed by**  
+@JaelDS & @cyrusmokua
+
+[![Documentation](https://img.shields.io/badge/Docs-Complete-green.svg)](#)
+[![Tests](https://img.shields.io/badge/Tests-Completed-green.svg)](#)
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-blue.svg)](#)
+
+</div>
