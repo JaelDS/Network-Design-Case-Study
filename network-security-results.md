@@ -410,7 +410,7 @@ The network security architecture successfully protected against route poisoning
 *Comprehensive validation for enterprise network protection*
 
 **Developed by**  
-@JaelDS & @cyrusmokua
+[![@JaelDS](https://img.shields.io/badge/GitHub-@JaelDS-181717?style=flat&logo=github)](https://github.com/JaelDS)  [![@cyrusmokua](https://img.shields.io/badge/GitHub-@cyrusmokua-181717?style=flat&logo=github)](https://github.com/cyrusmokua)
 
 [![Documentation](https://img.shields.io/badge/Docs-Complete-green.svg)](#)
 [![Tests](https://img.shields.io/badge/Tests-Completed-green.svg)](#)
