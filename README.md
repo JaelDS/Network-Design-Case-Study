@@ -3,7 +3,14 @@
 
 This repository contains the configuration files and implementation guidelines for a comprehensive network security solution designed to address five critical cybersecurity vulnerabilities.
 
+### Unsecure Network Design
 ![Network Topology](https://github.com/JaelDS/Network-Design-Case-Study/blob/main/Resources/Original.png)
+
+### Conceptual Network Design
+![Network Topology](https://github.com/JaelDS/Network-Design-Case-Study/blob/main/Resources/Theorical.png)
+
+### Practical Implementation Network Design
+![Network Topology](https://github.com/JaelDS/Network-Design-Case-Study/blob/main/Resources/Implementation.png)
 *Fig. 1: Network Security Topology*
 
 ## Table of Contents
