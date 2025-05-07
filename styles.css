@@ -971,6 +971,11 @@ footer {
   transition: color var(--transition-fast);
 }
 
+.footer-bottom span {
+  color: var(--color-gray-light);
+  transition: color var(--transition-fast);
+}
+
 .security-badge {
   display: flex;
   align-items: center;
