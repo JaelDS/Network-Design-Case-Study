@@ -1,22 +1,25 @@
 /*
  * Network Security Project - Styles
- * Modern cybersecurity-themed design with gradients
+ * Modern cybersecurity-themed design with cyan blue, white, and light gray
  */
 
 /* ===== Variables ===== */
 :root {
-  /* Primary Color Scheme - Purple/Pink Gradient */
-  --color-primary: #6E48AA;
-  --color-secondary: #FF6B6B;
-  --color-tertiary: #6B72FF;
-  --gradient-primary: linear-gradient(135deg, #6E48AA 0%, #FF6B6B 100%);
+  /* Primary Color Scheme - Based on requested colors and images */
+  --color-primary: #00BCEB;
+  --color-secondary: #00BCEB;
+  --color-tertiary: #0096BC;
+  --color-background: #FFFFFF;
+  --color-background-alt: #ECECEC;
+  --color-text-secondary: #888888;
+  --gradient-primary: linear-gradient(135deg, #00BCEB 0%, #0096BC 100%);
 
   /* Neutral Colors */
-  --color-dark: #2A2A3C;
-  --color-dark-alt: #3B3B53;
-  --color-light: #F8F9FA;
-  --color-gray: #9597A6;
-  --color-gray-light: #D8DAE5;
+  --color-dark: #333333;
+  --color-dark-alt: #555555;
+  --color-light: #FFFFFF;
+  --color-gray: #888888;
+  --color-gray-light: #ECECEC;
 
   /* Status Colors */
   --color-success: #4CAF50;
@@ -71,11 +74,14 @@
 
 /* ===== Dark Mode Colors ===== */
 [data-theme="dark"] {
-  --color-light: #2A2A3C;
-  --color-dark: #F8F9FA;
-  --color-dark-alt: #E2E3E9;
+  --color-background: #242424;
+  --color-background-alt: #333333;
+  --color-light: #242424;
+  --color-dark: #FFFFFF;
+  --color-dark-alt: #ECECEC;
   --color-gray: #A6A8B8;
   --color-gray-light: #4A4B58;
+  --color-text-secondary: #CCCCCC;
 
   /* Status Colors - Slightly muted for dark mode */
   --color-success: #3D8B40;
@@ -100,7 +106,7 @@ body {
   font-family: var(--font-primary);
   line-height: 1.6;
   color: var(--color-dark);
-  background-color: var(--color-light);
+  background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -114,29 +120,32 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 2.75rem;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-primary);
 }
 
 h2 {
   font-size: 2.25rem;
   margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
 }
 
 h3 {
   font-size: 1.5rem;
   margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
 }
 
 h4 {
   font-size: 1.25rem;
+  color: var(--color-primary);
 }
 
 p {
   margin-bottom: var(--spacing-md);
+}
+
+.section-header p {
+  color: var(--color-text-secondary);
 }
 
 a {
@@ -146,7 +155,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-secondary);
+  color: var(--color-tertiary);
 }
 
 ul, ol {
@@ -165,10 +174,11 @@ ul, ol {
 /* ===== Section Styles ===== */
 .section {
   padding: var(--spacing-xxl) 0;
+  position: relative;
 }
 
 .section.alt {
-  background-color: rgba(110, 72, 170, 0.03);
+  background-color: var(--color-background-alt);
 }
 
 .section-header {
@@ -180,7 +190,7 @@ ul, ol {
   font-size: 1.25rem;
   max-width: 700px;
   margin: 0 auto;
-  color: var(--color-gray);
+  color: var(--color-text-secondary);
 }
 
 /* ===== Button Styles ===== */
@@ -198,12 +208,13 @@ ul, ol {
 }
 
 .btn.primary {
-  background: var(--gradient-primary);
+  background: var(--color-primary);
   color: white;
   box-shadow: var(--shadow-md);
 }
 
 .btn.primary:hover {
+  background: var(--color-tertiary);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -222,7 +233,7 @@ ul, ol {
 /* ===== Header & Navigation ===== */
 header {
   position: relative;
-  background-color: var(--color-light);
+  background-color: var(--color-background);
 }
 
 .navbar {
@@ -231,7 +242,7 @@ header {
   left: 0;
   right: 0;
   height: var(--header-height);
-  background-color: rgba(248, 249, 250, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
@@ -240,10 +251,10 @@ header {
 }
 
 [data-theme="dark"] .navbar {
-  background-color: rgba(42, 42, 60, 0.9);
+  background-color: rgba(36, 36, 36, 0.95);
 }
 
-/* Dark Mode Toggle - Clean Version with Properly Centered Icon */
+/* Dark Mode Toggle */
 .dark-mode-toggle {
   display: flex;
   align-items: center;
@@ -261,7 +272,7 @@ header {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6E48AA 0%, #FF6B6B 100%);
+  background: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -275,6 +286,7 @@ header {
   justify-content: center;
   width: 16px;
   height: 16px;
+  color: white;
   transition: all var(--transition-medium);
 }
 
@@ -294,11 +306,22 @@ header {
   height: 100%;
 }
 
+/* Replace your current logo styles with this */
 .logo {
-  display: flex;
+  display: inline-flex;  /* Changed from flex to inline-flex */
   align-items: center;
   font-weight: var(--font-weight-bold);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  white-space: nowrap;  /* Prevent text wrapping */
+}
+
+/* Make sure the SVG is properly sized and aligned */
+.logo svg {
+  display: inline-block;
+  margin-right: var(--spacing-sm);
+  vertical-align: middle;
+  width: 100px;  /* Adjust as needed */
+  height: 100px;  /* Adjust as needed */
 }
 
 .logo svg {
@@ -329,7 +352,7 @@ header {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background: var(--gradient-primary);
+  background: var(--color-primary);
   transition: width var(--transition-medium);
 }
 
@@ -337,35 +360,26 @@ header {
   width: 100%;
 }
 
-.dark-mode-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--border-radius-full);
-  background-color: var(--color-gray-light);
+/* Mobile Menu */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  transition: background-color var(--transition-fast);
+  padding: 0;
+  margin-left: auto;
 }
 
-.dark-mode-toggle:hover {
-  background-color: var(--color-gray);
-}
-
-.icon-moon,
-.icon-sun {
-  width: 20px;
-  height: 20px;
-  transition: opacity var(--transition-fast);
-}
-
-[data-theme="dark"] .icon-moon {
-  display: none;
-}
-
-[data-theme="light"] .icon-sun {
-  display: none;
+.mobile-menu-btn .bar {
+  height: 3px;
+  width: 100%;
+  background-color: var(--color-dark);
+  border-radius: 10px;
+  transition: var(--transition-fast);
 }
 
 /* ===== Hero Section ===== */
@@ -394,7 +408,7 @@ header {
 .hero-content p {
   font-size: 1.25rem;
   margin-bottom: var(--spacing-lg);
-  color: var(--color-gray);
+  color: var(--color-text-secondary);
 }
 
 .hero-buttons {
@@ -409,23 +423,31 @@ header {
   z-index: 0;
 }
 
-.hero-image svg {
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(var(--shadow-lg));
-  animation: float 6s ease-in-out infinite;
+/* Logo Container for Partnership Logos */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+.partner-logo {
+  max-width: 200px;
+  height: auto;
+  transition: transform var(--transition-medium);
+}
+
+.partner-logo:hover {
+  transform: scale(1.05);
+}
+
+.cisco-logo {
+  filter: drop-shadow(var(--shadow-sm));
+}
+
+.torrens-logo {
+  filter: drop-shadow(var(--shadow-sm));
 }
 
 /* ===== Overview Section ===== */
@@ -445,7 +467,7 @@ header {
 }
 
 [data-theme="dark"] .overview-card {
-  background-color: var(--color-dark-alt);
+  background-color: var(--color-background-alt);
 }
 
 .overview-card:hover {
@@ -456,19 +478,21 @@ header {
   width: 60px;
   height: 60px;
   border-radius: var(--border-radius-full);
-  background: var(--gradient-primary);
+  background: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: var(--spacing-md);
+  color: white;
 }
 
 .overview-card h3 {
   margin-bottom: var(--spacing-sm);
+  color: var(--color-primary);
 }
 
 .overview-card p {
-  color: var(--color-gray);
+  color: var(--color-text-secondary);
   margin-bottom: 0;
 }
 
@@ -495,11 +519,12 @@ header {
 }
 
 .video-placeholder {
-  background-color: var(--color-dark-alt);
+  background-color: var(--color-primary);
   aspect-ratio: 16 / 9;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .placeholder-content {
@@ -543,7 +568,7 @@ header {
 }
 
 .tab-btn:hover {
-  background-color: rgba(110, 72, 170, 0.1);
+  background-color: rgba(0, 188, 235, 0.1);
 }
 
 .tab-btn.active {
@@ -610,7 +635,7 @@ header {
 }
 
 .solution-highlights {
-  background-color: rgba(110, 72, 170, 0.05);
+  background-color: rgba(0, 188, 235, 0.05);
   border-radius: var(--border-radius-md);
   padding: var(--spacing-md);
   margin-top: var(--spacing-lg);
@@ -713,7 +738,7 @@ header {
 }
 
 [data-theme="dark"] .implementation-item {
-  background-color: var(--color-dark-alt);
+  background-color: var(--color-background-alt);
 }
 
 .implementation-item h4 {
@@ -739,7 +764,7 @@ header {
 
 .code-preview code {
   font-family: monospace;
-  color: var(--color-light);
+  color: white;
 }
 
 /* ===== Testing Section ===== */
@@ -767,7 +792,7 @@ header {
 }
 
 [data-theme="dark"] .testing-item {
-  background-color: var(--color-dark-alt);
+  background-color: var(--color-background-alt);
 }
 
 .test-header {
@@ -800,7 +825,7 @@ header {
 
 .test-details {
   margin-top: var(--spacing-md);
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: rgba(0, 188, 235, 0.05);
   border-radius: var(--border-radius-md);
   padding: var(--spacing-md);
 }
@@ -814,59 +839,6 @@ header {
 }
 
 .test-details ul {
-  margin-bottom: 0;
-}
-
-.production-recommendations {
-  margin-top: var(--spacing-xxl);
-}
-
-.production-recommendations h3 {
-  text-align: center;
-  margin-bottom: var(--spacing-lg);
-}
-
-.recommendations-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-lg);
-}
-
-.recommendation-item {
-  background-color: white;
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-lg);
-  text-align: center;
-  box-shadow: var(--shadow-md);
-  transition: transform var(--transition-medium);
-}
-
-[data-theme="dark"] .recommendation-item {
-  background-color: var(--color-dark-alt);
-}
-
-.recommendation-item:hover {
-  transform: translateY(-5px);
-}
-
-.recommendation-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto var(--spacing-md);
-  border-radius: var(--border-radius-full);
-  background: var(--gradient-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.recommendation-item h4 {
-  color: var(--color-primary);
-  margin-bottom: var(--spacing-sm);
-}
-
-.recommendation-item p {
-  color: var(--color-gray);
   margin-bottom: 0;
 }
 
@@ -890,7 +862,7 @@ header {
 }
 
 [data-theme="dark"] .team-member {
-  background-color: var(--color-dark-alt);
+  background-color: var(--color-background-alt);
 }
 
 .member-photo {
@@ -904,7 +876,7 @@ header {
 .photo-placeholder {
   width: 100%;
   height: 100%;
-  background: var(--gradient-primary);
+  background: var(--color-primary);
 }
 
 .member-title {
@@ -914,7 +886,7 @@ header {
 }
 
 .member-bio {
-  color: var(--color-gray);
+  color: var(--color-text-secondary);
   margin-bottom: 0;
 }
 
@@ -953,7 +925,7 @@ footer {
 
 .footer-nav-column h4 {
   margin-bottom: var(--spacing-md);
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 .footer-nav-column ul {
@@ -981,6 +953,11 @@ footer {
   align-items: center;
   padding-top: var(--spacing-lg);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom{
+  color: var(--color-gray-light);
+  transition: color var(--transition-fast);
 }
 
 .security-badge {
@@ -1072,14 +1049,6 @@ footer {
   content: '🔒';
 }
 
-.icon-moon::before {
-  content: '🌙';
-}
-
-.icon-sun::before {
-  content: '☀️';
-}
-
 /* ===== Responsive Styles ===== */
 @media (max-width: 1024px) {
   html {
@@ -1103,34 +1072,10 @@ footer {
   .hero-image {
     max-width: 400px;
   }
-}
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .tab-content.active {
-    flex-direction: column;
-  }
-
-  .threat-visual,
-  .threat-info {
-    min-width: 100%;
-  }
-
-  .footer-top {
-    flex-direction: column;
-  }
-
-  .footer-nav {
-    gap: var(--spacing-lg);
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    gap: var(--spacing-md);
-    text-align: center;
+  .logo-container {
+    flex-direction: row;
+    gap: var(--spacing-xl);
   }
 }
 
@@ -1151,6 +1096,10 @@ footer {
   .hero-buttons .btn {
     width: 100%;
   }
+
+  .partner-logo {
+    max-width: 150px;
+  }
 }
 
 /* ===== Animations ===== */
@@ -1169,20 +1118,6 @@ footer {
   animation: fadeIn 0.8s ease-out;
 }
 
-/* ===== Dark Mode Styles ===== */
-[data-theme="dark"] {
-  background-color: var(--color-light);
-  color: var(--color-dark);
-}
-
-[data-theme="dark"] .navbar {
-  background-color: rgba(42, 42, 60, 0.9);
-}
-
-[data-theme="dark"] .nav-links a {
-  color: var(--color-dark);
-}
-
 /* ===== Cybersecurity-Specific CSS ===== */
 /* Security indicator pulse animation */
 .security-badge .badge-icon {
@@ -1194,7 +1129,7 @@ footer {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary);
   border-radius: 50%;
   z-index: -1;
   animation: pulse 2s infinite;
@@ -1232,7 +1167,7 @@ footer {
   z-index: 0;
 }
 
-/* Honeycomb pattern for security sections */
+/* Pattern for security sections */
 .section.alt::before {
   content: '';
   position: absolute;
@@ -1246,11 +1181,6 @@ footer {
   background-position: 0 0, 30px 30px;
   opacity: 0.03;
   z-index: 0;
-}
-
-/* Content Security Policy nonce support */
-.nonce-scripts {
-  display: none;
 }
 
 /* Accessible focus styles for keyboard navigation */

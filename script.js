@@ -6,7 +6,6 @@
  * - Tab navigation for threats section
  * - Scroll animations
  * - Mobile menu functionality
- * - Content security features
  */
 
 // Wait for DOM to be fully loaded
@@ -16,18 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
   initTabs();
   initScrollEffects();
   initMobileMenu();
-  initSecurityFeatures();
+  enhanceAccessibility();
 });
 
 /**
  * Dark Mode Toggle
  * Switches between light and dark themes
  */
-const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
-
-const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
-
-
 function initDarkMode() {
   const darkModeToggle = document.getElementById('darkModeToggle');
 
@@ -46,28 +40,32 @@ function initDarkMode() {
   // Toggle theme when button is clicked
   if (darkModeToggle) {
     // Create a span element to hold the icon
-    const iconContainer = darkModeToggle.querySelector('.toggle-icon') || document.createElement('span');
-    iconContainer.className = 'toggle-icon';
+    const iconContainer = darkModeToggle.querySelector('.toggle-icon');
 
     // Set initial icon based on current theme
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    iconContainer.innerHTML = currentTheme === 'dark' ? sunIcon : moonIcon;
-
-    // Append the icon container if it doesn't exist
-    if (!darkModeToggle.querySelector('.toggle-icon')) {
-      darkModeToggle.appendChild(iconContainer);
-    }
+    updateThemeIcon();
 
     darkModeToggle.addEventListener('click', function() {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-      // Update the icon based on the new theme
-      iconContainer.innerHTML = newTheme === 'dark' ? sunIcon : moonIcon;
-
       document.documentElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
+
+      updateThemeIcon();
     });
+  }
+
+  // Helper function to update the theme icon
+  function updateThemeIcon() {
+    const iconContainer = darkModeToggle.querySelector('.toggle-icon');
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+
+    if (currentTheme === 'dark') {
+      iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+    } else {
+      iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+    }
   }
 }
 
@@ -86,15 +84,21 @@ function initTabs() {
       // Remove active class from all buttons and content
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
       });
 
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
+        content.setAttribute('aria-hidden', 'true');
       });
 
       // Add active class to clicked button and corresponding content
       this.classList.add('active');
-      document.getElementById(targetTab).classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+
+      const targetContent = document.getElementById(targetTab);
+      targetContent.classList.add('active');
+      targetContent.setAttribute('aria-hidden', 'false');
     });
   });
 }
@@ -105,21 +109,20 @@ function initTabs() {
  */
 function initScrollEffects() {
   const navbar = document.querySelector('.navbar');
-  const sections = document.querySelectorAll('.section');
 
   // Navbar background change on scroll
-  window.addEventListener('scroll', function() {
+  function handleScroll() {
     if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
-  });
+  }
+
+  window.addEventListener('scroll', handleScroll);
 
   // Initial check for page load with scroll already happened
-  if (window.scrollY > 50) {
-    navbar.classList.add('scrolled');
-  }
+  handleScroll();
 
   // Smooth scrolling for anchor links
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
@@ -154,126 +157,28 @@ function initScrollEffects() {
  * Handles the mobile navigation menu
  */
 function initMobileMenu() {
-  // This would be implemented for the mobile hamburger menu
-  // Since we're using a simple design for now, this is a placeholder
-  // The full implementation would toggle a mobile-friendly navigation
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
 
-  // Create mobile menu button element (not present in HTML yet)
-  const createMobileMenuButton = () => {
-    // Only create if not on desktop
-    if (window.innerWidth <= 768) {
-      const navbar = document.querySelector('.navbar .container');
+  if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', function() {
+      navLinks.classList.toggle('active');
+      mobileMenuBtn.classList.toggle('active');
 
-      // Check if button already exists
-      if (!document.querySelector('.mobile-menu-btn')) {
-        // Create button
-        const mobileMenuBtn = document.createElement('button');
-        mobileMenuBtn.className = 'mobile-menu-btn';
-        mobileMenuBtn.setAttribute('aria-label', 'Toggle navigation menu');
-        mobileMenuBtn.innerHTML = `
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        `;
+      const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+      mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+    });
 
-        // Insert before dark mode toggle
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        navbar.insertBefore(mobileMenuBtn, darkModeToggle);
-
-        // Add event listener
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-      }
-    }
-  };
-
-  // Toggle mobile menu visibility
-  const toggleMobileMenu = () => {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('active');
-
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    mobileMenuBtn.classList.toggle('active');
-  };
-
-  // Call on initial load
-  createMobileMenuButton();
-
-  // Update on window resize
-  window.addEventListener('resize', createMobileMenuButton);
-}
-
-/**
- * Security Features
- * Implements client-side security measures
- */
-function initSecurityFeatures() {
-  // CSP Nonce generation
-  function generateNonce() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let nonce = '';
-
-    for (let i = 0; i < 16; i++) {
-      nonce += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-
-    return nonce;
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        navLinks.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
   }
-
-  // Apply nonce to script elements
-  const nonce = generateNonce();
-  const scriptElements = document.querySelectorAll('script:not([nonce])');
-
-  scriptElements.forEach(script => {
-    script.setAttribute('nonce', nonce);
-  });
-
-  // Sanitize user input (for potential form submissions)
-  // This is a simple implementation - production would use a library
-  window.sanitizeInput = function(input) {
-    const element = document.createElement('div');
-    element.textContent = input;
-    return element.innerHTML;
-  };
-
-  // Add noopener and noreferrer to external links
-  const externalLinks = document.querySelectorAll('a[target="_blank"]');
-
-  externalLinks.forEach(link => {
-    if (!link.getAttribute('rel') || !link.getAttribute('rel').includes('noopener')) {
-      const currentRel = link.getAttribute('rel') || '';
-      link.setAttribute('rel', `${currentRel} noopener noreferrer`.trim());
-    }
-  });
-
-  // Validate forms (for any potential data collection)
-  function validateFormData(formData) {
-    // Simple validation example
-    // In a real app, this would be more comprehensive
-    let isValid = true;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (formData.email && !emailRegex.test(formData.email)) {
-      isValid = false;
-    }
-
-    return isValid;
-  }
-
-  // Expose this function globally
-  window.validateFormData = validateFormData;
 }
-
-/**
- * Video Placeholder Interaction
- * Handles clicks on video placeholders to show potential interaction
- */
-document.querySelectorAll('.video-placeholder').forEach(placeholder => {
-  placeholder.addEventListener('click', function() {
-    // In a real implementation, this would initialize a video player
-    // For now, we'll just show an alert
-    alert('Video playback would start here. This is a placeholder for the actual video content.');
-  });
-});
 
 /**
  * Accessibility Enhancements
@@ -300,10 +205,42 @@ function enhanceAccessibility() {
       }
     });
   });
+
+  // Set mobile menu button ARIA attributes
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  if (mobileMenuBtn) {
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenuBtn.setAttribute('aria-controls', 'nav-links');
+  }
+
+  // Make video placeholders accessible
+  document.querySelectorAll('.video-placeholder').forEach(placeholder => {
+    placeholder.setAttribute('role', 'button');
+    placeholder.setAttribute('tabindex', '0');
+    placeholder.setAttribute('aria-label', 'Play video');
+
+    placeholder.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleVideoPlaceholderClick(this);
+      }
+    });
+
+    placeholder.addEventListener('click', function() {
+      handleVideoPlaceholderClick(this);
+    });
+  });
 }
 
-// Call accessibility enhancements after DOM is loaded
-document.addEventListener('DOMContentLoaded', enhanceAccessibility);
+/**
+ * Video Placeholder Interaction
+ * Handles clicks on video placeholders
+ */
+function handleVideoPlaceholderClick(placeholder) {
+  // In a real implementation, this would initialize a video player
+  // For now, we'll just show an alert
+  alert('Video playback would start here. This is a placeholder for the actual video content.');
+}
 
 /**
  * Performance Optimizations
@@ -311,29 +248,26 @@ document.addEventListener('DOMContentLoaded', enhanceAccessibility);
  */
 function optimizePerformance() {
   // Lazy load images (if not using native browser lazy loading)
-  const lazyImages = document.querySelectorAll('img:not([loading])');
-  lazyImages.forEach(img => {
+  document.querySelectorAll('img:not([loading])').forEach(img => {
     img.setAttribute('loading', 'lazy');
   });
 
   // Use requestAnimationFrame for scroll animations
-  let lastKnownScrollPosition = 0;
   let ticking = false;
 
   function doSomethingOnScroll(scrollPos) {
     // Here you would update animations based on scroll position
     // This is more efficient than running in the scroll event directly
+    ticking = false;
   }
 
   window.addEventListener('scroll', function() {
-    lastKnownScrollPosition = window.scrollY;
+    const lastKnownScrollPosition = window.scrollY;
 
     if (!ticking) {
       window.requestAnimationFrame(function() {
         doSomethingOnScroll(lastKnownScrollPosition);
-        ticking = false;
       });
-
       ticking = true;
     }
   });
@@ -341,61 +275,3 @@ function optimizePerformance() {
 
 // Call performance optimizations after initial load
 window.addEventListener('load', optimizePerformance);
-
-/**
- * Custom event handling for project-specific interactions
- */
-const SecurityEvents = {
-  // Custom event emitter
-  emit: function(eventName, data) {
-    const event = new CustomEvent(eventName, { detail: data });
-    document.dispatchEvent(event);
-  },
-
-  // Event listeners
-  on: function(eventName, callback) {
-    document.addEventListener(eventName, function(e) {
-      callback(e.detail);
-    });
-  }
-};
-
-// Example usage of custom events
-SecurityEvents.on('threat-selected', function(threatData) {
-  console.log('Threat selected:', threatData);
-  // Update UI based on selected threat
-});
-
-// When a tab is clicked, emit a custom event
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const threatType = this.getAttribute('data-tab');
-      SecurityEvents.emit('threat-selected', { type: threatType });
-    });
-  });
-});
-
-/**
- * Additional cybersecurity visualizations
- * These would be implemented when specific sections are in view
- */
-function initSecurityVisualizations() {
-  // This is a placeholder for potential canvas or SVG visualizations
-  // that could be added to enhance the security presentation
-
-  // Example: Create a simple network connection visualization
-  const createNetworkVisualization = (containerId) => {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    // Implementation would go here
-    // This would typically use canvas, SVG, or a library like D3.js
-  };
-
-  // Call for specific containers
-  // createNetworkVisualization('network-viz-container');
-}
-
-// Initialize visualizations after page load
-window.addEventListener('load', initSecurityVisualizations);

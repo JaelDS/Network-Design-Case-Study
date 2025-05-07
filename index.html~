@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; font-src 'self' https://cdnjs.cloudflare.com; frame-src 'self'">
+    <title>Network Security Implementation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <?xml version="1.0" encoding="UTF-8"?>
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Define color palette -->
+                    <defs>
+                        <linearGradient id="gradientBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00BCEB"/>
+                            <stop offset="100%" stop-color="#0099C8"/>
+                        </linearGradient>
+                        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                            <feOffset dx="1" dy="1" result="offsetblur"/>
+                            <feComponentTransfer>
+                                <feFuncA type="linear" slope="0.3"/>
+                            </feComponentTransfer>
+                            <feMerge>
+                                <feMergeNode/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- Background -->
+                    <circle cx="100" cy="100" r="95" fill="white" stroke="#00BCEB" stroke-width="2"/>
+
+                    <!-- Central server/router -->
+                    <rect x="85" y="80" width="30" height="40" rx="3" ry="3" fill="url(#gradientBlue)" filter="url(#shadow)"/>
+                    <rect x="92" y="87" width="16" height="4" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+                    <rect x="92" y="95" width="16" height="4" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+                    <rect x="92" y="103" width="16" height="4" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+                    <rect x="92" y="111" width="16" height="4" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+
+                    <!-- Network nodes (computers/devices) -->
+                    <circle cx="60" cy="50" r="15" fill="url(#gradientBlue)" filter="url(#shadow)"/>
+                    <rect x="54" y="48" width="12" height="8" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+                    <rect x="54" y="42" width="12" height="4" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+
+                    <circle cx="140" cy="50" r="15" fill="url(#gradientBlue)" filter="url(#shadow)"/>
+                    <rect x="134" y="48" width="12" height="8" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+                    <rect x="134" y="42" width="12" height="4" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+
+                    <circle cx="50" cy="130" r="15" fill="url(#gradientBlue)" filter="url(#shadow)"/>
+                    <rect x="44" y="128" width="12" height="8" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+                    <rect x="44" y="122" width="12" height="4" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+
+                    <circle cx="150" cy="130" r="15" fill="url(#gradientBlue)" filter="url(#shadow)"/>
+                    <rect x="144" y="128" width="12" height="8" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+                    <rect x="144" y="122" width="12" height="4" rx="1" ry="1" fill="white" fill-opacity="0.8"/>
+
+                    <!-- Connection lines -->
+                    <line x1="74" y1="55" x2="85" y2="80" stroke="#00BCEB" stroke-width="3"/>
+                    <line x1="126" y1="55" x2="115" y2="80" stroke="#00BCEB" stroke-width="3"/>
+                    <line x1="63" y1="125" x2="85" y2="110" stroke="#00BCEB" stroke-width="3"/>
+                    <line x1="137" y1="125" x2="115" y2="110" stroke="#00BCEB" stroke-width="3"/>
+
+                    <!-- Additional network elements -->
+                    <circle cx="100" cy="30" r="10" fill="url(#gradientBlue)" filter="url(#shadow)"/>
+                    <path d="M95,30 L105,30 M100,25 L100,35" stroke="white" stroke-width="2"/>
+
+                    <circle cx="30" cy="90" r="10" fill="url(#gradientBlue)" filter="url(#shadow)"/>
+                    <path d="M25,90 L35,90 M30,85 L30,95" stroke="white" stroke-width="2"/>
+
+                    <circle cx="170" cy="90" r="10" fill="url(#gradientBlue)" filter="url(#shadow)"/>
+                    <path d="M165,90 L175,90 M170,85 L170,95" stroke="white" stroke-width="2"/>
+
+                    <circle cx="100" cy="160" r="10" fill="url(#gradientBlue)" filter="url(#shadow)"/>
+                    <path d="M95,160 L105,160 M100,155 L100,165" stroke="white" stroke-width="2"/>
+
+                    <!-- Additional connecting lines -->
+                    <line x1="100" y1="40" x2="100" y2="80" stroke="#00BCEB" stroke-width="2" stroke-dasharray="4,2"/>
+                    <line x1="40" y1="90" x2="85" y2="90" stroke="#00BCEB" stroke-width="2" stroke-dasharray="4,2"/>
+                    <line x1="115" y1="90" x2="160" y2="90" stroke="#00BCEB" stroke-width="2" stroke-dasharray="4,2"/>
+                    <line x1="100" y1="120" x2="100" y2="150" stroke="#00BCEB" stroke-width="2" stroke-dasharray="4,2"/>
+
+                    <!-- Decorative network waves/pings -->
+                    <circle cx="100" cy="100" r="30" fill="none" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.3"/>
+                    <circle cx="100" cy="100" r="50" fill="none" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.2"/>
+                    <circle cx="100" cy="100" r="70" fill="none" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.1"/>
+                </svg>
+                <span>Network Design</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#threats">Threats</a></li>
+                <li><a href="#implementation">Implementation</a></li>
+                <li><a href="#testing">Testing</a></li>
+                <li><a href="#team">Team</a></li>
+            </ul>
+            <div class="dark-mode-toggle" id="darkModeToggle">
+                <div class="toggle-switch">
+                    <span class="toggle-icon"></span>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Comprehensive Network Security Implementation</h1>
+                <p>Addressing five critical vulnerabilities with a defense-in-depth approach</p>
+                <div class="hero-buttons">
+                    <a href="#overview" class="btn primary">Learn More</a>
+                    <a href="#implementation" class="btn secondary">View Solutions</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="logo-container">
+                    <img src="resources/cisco-logo.png" alt="Cisco Logo" class="partner-logo cisco-logo">
+                    <img src="resources/torrens-logo.png" alt="Torrens University Logo" class="partner-logo torrens-logo">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="overview" class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Project Overview</h2>
+            <p>A defense-in-depth strategy for enterprise-grade network security</p>
+        </div>
+        <div class="overview-grid">
+            <div class="overview-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 2ZM12 4.08L19 6.5V11C19 15.41 16.21 19.67 12 20.9C7.79 19.67 5 15.41 5 11V6.5L12 4.08Z" fill="white"/>
+                    </svg>
+                </div>
+                <h3>Security Zones</h3>
+                <p>Isolated network zones with clearly defined security boundaries</p>
+            </div>
+            <div class="overview-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L4 5V11.09C4 16.14 7.41 20.85 12 22C16.59 20.85 20 16.14 20 11.09V5L12 2ZM16 13H8V11H16V13ZM16 9H8V7H16V9Z" fill="white"/>
+                    </svg>
+                </div>
+                <h3>Multi-Layer Defense</h3>
+                <p>Security controls implemented across all OSI model layers</p>
+            </div>
+            <div class="overview-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM15 12L10 8V16L15 12Z" fill="white"/>
+                    </svg>
+                </div>
+                <h3>Redundant Design</h3>
+                <p>Meshed core network with failover capabilities</p>
+            </div>
+            <div class="overview-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17ZM15.1 8H8.9V6C8.9 4.29 10.29 2.9 12 2.9C13.71 2.9 15.1 4.29 15.1 6V8Z" fill="white"/>
+                    </svg>
+                </div>
+                <h3>Access Controls</h3>
+                <p>Centralized authentication and strict authorization</p>
+            </div>
+        </div>
+        <div class="overview-video">
+            <h3>Project Introduction</h3>
+            <div class="video-container">
+                <!-- Video placeholder - Replace with actual video embed -->
+                <div class="video-placeholder">
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon" data-icon="play"></div>
+                        <p>Project Introduction Video</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="threats" class="section alt">
+    <div class="container">
+        <div class="section-header">
+            <h2>Addressing Critical Threats</h2>
+            <p>Our solution tackles five major cybersecurity vulnerabilities</p>
+        </div>
+        <div class="threats-container">
+            <div class="threat-tabs">
+                <button class="tab-btn active" data-tab="heartbleed">Heartbleed</button>
+                <button class="tab-btn" data-tab="sql">SQL Injection</button>
+                <button class="tab-btn" data-tab="mitm">MITM Attacks</button>
+                <button class="tab-btn" data-tab="route">Route Poisoning</button>
+                <button class="tab-btn" data-tab="phishing">Phishing</button>
+            </div>
+            <div class="threat-content">
+                <div class="tab-content active" id="heartbleed">
+                    <div class="threat-info">
+                        <div class="threat-header">
+                            <h3>Heartbleed Vulnerability (CVE-2014-0160)</h3>
+                            <div class="threat-metrics">
+                                <span class="metric critical">Risk: Critical</span>
+                                <span class="metric high">Attacker ROI: High</span>
+                                <span class="metric low">Attack Effort: Low</span>
+                                <span class="metric difficult">Detection: Difficult</span>
+                            </div>
+                        </div>
+                        <p>Heartbleed is a critical vulnerability in OpenSSL that exposes memory segments, potentially compromising private keys and sensitive data. The bug allows attackers to extract memory contents including encryption keys, user credentials, and session cookies.</p>
+                        <div class="solution-highlights">
+                            <h4>Our Solution</h4>
+                            <ul>
+                                <li>Deep packet inspection (DPI) to detect Heartbleed exploits</li>
+                                <li>TLS/SSL version control and protocol validation</li>
+                                <li>Next-Generation Firewall (NGFW) application inspection</li>
+                                <li>Regular security patches and updates</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="threat-visual">
+                        <img src="/api/placeholder/400/300" alt="Heartbleed diagram">
+                    </div>
+                </div>
+                <div class="tab-content" id="sql">
+                    <div class="threat-info">
+                        <div class="threat-header">
+                            <h3>SQL Injection</h3>
+                            <div class="threat-metrics">
+                                <span class="metric high">Risk: High</span>
+                                <span class="metric high">Attacker ROI: High</span>
+                                <span class="metric low">Attack Effort: Low</span>
+                                <span class="metric medium">Detection: Detectable</span>
+                            </div>
+                        </div>
+                        <p>SQL injection occurs when malicious SQL statements are inserted into entry fields for execution. It allows attackers to bypass authentication, access, modify, or delete data in databases, compromising data integrity and confidentiality.</p>
+                        <div class="solution-highlights">
+                            <h4>Our Solution</h4>
+                            <ul>
+                                <li>Database isolation using VLAN segmentation</li>
+                                <li>Parameterized queries and input validation</li>
+                                <li>Strict database access controls</li>
+                                <li>Web Application Firewall (WAF) implementation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="threat-visual">
+                        <img src="/api/placeholder/400/300" alt="SQL Injection diagram">
+                    </div>
+                </div>
+                <div class="tab-content" id="mitm">
+                    <div class="threat-info">
+                        <div class="threat-header">
+                            <h3>Man-in-the-Middle (MITM) Attacks</h3>
+                            <div class="threat-metrics">
+                                <span class="metric medium">Risk: Medium</span>
+                                <span class="metric medium">Attacker ROI: Medium</span>
+                                <span class="metric medium">Attack Effort: Medium</span>
+                                <span class="metric medium">Detection: Moderate</span>
+                            </div>
+                        </div>
+                        <p>MITM attacks occur when attackers position themselves between communicating parties, intercepting and potentially altering communication. This allows them to eavesdrop on sensitive information or hijack sessions.</p>
+                        <div class="solution-highlights">
+                            <h4>Our Solution</h4>
+                            <ul>
+                                <li>Port security with MAC address binding</li>
+                                <li>DHCP snooping to prevent rogue DHCP servers</li>
+                                <li>Dynamic ARP inspection (DAI)</li>
+                                <li>802.1X port authentication</li>
+                                <li>VPN for secure wireless communication</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="threat-visual">
+                        <img src="/api/placeholder/400/300" alt="MITM Attack diagram">
+                    </div>
+                </div>
+                <div class="tab-content" id="route">
+                    <div class="threat-info">
+                        <div class="threat-header">
+                            <h3>BGP Route Poisoning</h3>
+                            <div class="threat-metrics">
+                                <span class="metric medium">Risk: Medium</span>
+                                <span class="metric medium">Attacker ROI: Medium</span>
+                                <span class="metric medium">Attack Effort: Medium</span>
+                                <span class="metric medium">Detection: Moderate</span>
+                            </div>
+                        </div>
+                        <p>Route poisoning attacks involve injecting falsified routing updates to alter routing tables, causing traffic redirection or denial of service. This can lead to traffic being routed through attacker-controlled systems for interception.</p>
+                        <div class="solution-highlights">
+                            <h4>Our Solution</h4>
+                            <ul>
+                                <li>RIP authentication using ACL protection</li>
+                                <li>OSPF with message digest authentication</li>
+                                <li>Access Control Lists for routing updates</li>
+                                <li>Secure routing protocol implementation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="threat-visual">
+                        <img src="/api/placeholder/400/300" alt="Route Poisoning diagram">
+                    </div>
+                </div>
+                <div class="tab-content" id="phishing">
+                    <div class="threat-info">
+                        <div class="threat-header">
+                            <h3>Phishing Attacks</h3>
+                            <div class="threat-metrics">
+                                <span class="metric high">Risk: High</span>
+                                <span class="metric high">Attacker ROI: High</span>
+                                <span class="metric low">Attack Effort: Low</span>
+                                <span class="metric medium">Detection: Moderate</span>
+                            </div>
+                        </div>
+                        <p>Phishing attacks use social engineering to deceive users into revealing credentials or installing malware. These attacks often serve as the initial access point for more sophisticated network intrusions.</p>
+                        <div class="solution-highlights">
+                            <h4>Our Solution</h4>
+                            <ul>
+                                <li>Centralized AAA server for authentication</li>
+                                <li>TACACS+ and RADIUS implementation</li>
+                                <li>Email gateway protection</li>
+                                <li>URL filtering</li>
+                                <li>Multi-factor authentication</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="threat-visual">
+                        <img src="/api/placeholder/400/300" alt="Phishing diagram">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="implementation" class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Implementation Details</h2>
+            <p>How we secured the network across all OSI layers</p>
+        </div>
+        <div class="network-architecture">
+            <h3>Network Architecture Transformation</h3>
+            <div class="architecture-comparison">
+                <div class="architecture-item">
+                    <h4>Previous (Unsecured)</h4>
+                    <div class="architecture-visual">
+                        <img src="/api/placeholder/500/300" alt="Unsecured network topology">
+                    </div>
+                    <ul class="architecture-issues">
+                        <li>Linear/tree topology with no redundancy</li>
+                        <li>No security zones or segmentation</li>
+                        <li>Missing firewall protection</li>
+                        <li>Local-only authentication</li>
+                        <li>Direct database exposure</li>
+                    </ul>
+                </div>
+                <div class="architecture-item">
+                    <h4>Current (Secured)</h4>
+                    <div class="architecture-visual">
+                        <img src="/api/placeholder/500/300" alt="Secured network topology">
+                    </div>
+                    <ul class="architecture-features">
+                        <li>Meshed core with isolated security zones</li>
+                        <li>Next-Generation Firewall protection</li>
+                        <li>Centralized AAA infrastructure</li>
+                        <li>VLAN segmentation for database isolation</li>
+                        <li>802.1X port-based authentication</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="implementation-details">
+            <h3>Key Security Components</h3>
+            <div class="implementation-grid">
+                <div class="implementation-item">
+                    <h4>Next-Generation Firewall</h4>
+                    <p>ASA 5505 with deep packet inspection, application awareness, and stateful filtering capabilities to protect against Heartbleed and other application-layer attacks.</p>
+                    <div class="code-preview">
+                            <pre><code>access-list OUTSIDE_IN extended permit icmp any any echo-reply
+access-list OUTSIDE_IN extended permit tcp any any eq 443
+access-list OUTSIDE_IN extended deny ip any any
+policy-map global_policy
+  class inspection_default
+    inspect ftp
+    inspect http</code></pre>
+                    </div>
+                </div>
+                <div class="implementation-item">
+                    <h4>VLAN Segmentation</h4>
+                    <p>Database isolation using dedicated VLAN with strict access controls to prevent SQL injection attacks and limit lateral movement.</p>
+                    <div class="code-preview">
+                            <pre><code>vlan 50
+ name Database
+interface FastEthernet0/2
+ description Database Server
+ switchport mode access
+ switchport access vlan 50
+ switchport port-security</code></pre>
+                    </div>
+                </div>
+                <div class="implementation-item">
+                    <h4>Port Security</h4>
+                    <p>MAC address binding and port violation protection to prevent unauthorized devices from connecting to the network and mitigate MITM attacks.</p>
+                    <div class="code-preview">
+                            <pre><code>interface range FastEthernet0/2 - 12
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address sticky
+ switchport port-security violation shutdown</code></pre>
+                    </div>
+                </div>
+                <div class="implementation-item">
+                    <h4>Routing Protocol Security</h4>
+                    <p>ACL-based protection for routing updates to prevent route poisoning attacks and maintain routing table integrity.</p>
+                    <div class="code-preview">
+                            <pre><code>access-list 101 permit udp host 192.168.10.2 host 224.0.0.9 eq 520
+access-list 101 permit udp host 172.16.12.2 host 224.0.0.9 eq 520
+access-list 101 deny udp any host 224.0.0.9 eq 520
+access-list 101 permit ip any any</code></pre>
+                    </div>
+                </div>
+                <div class="implementation-item">
+                    <h4>AAA Server</h4>
+                    <p>Centralized authentication, authorization, and accounting using TACACS+ and RADIUS protocols to mitigate phishing and credential theft.</p>
+                    <div class="code-preview">
+                            <pre><code>aaa new-model
+aaa authentication login default group tacacs+ local
+aaa accounting exec default start-stop group tacacs+
+tacacs-server host 192.168.1.2 key AAA-Secret-Key123</code></pre>
+                    </div>
+                </div>
+                <div class="implementation-item">
+                    <h4>Wireless Security</h4>
+                    <p>Hardened wireless configuration with WPA2-PSK, AES encryption, and VPN for secure remote access.</p>
+                    <div class="code-preview">
+                            <pre><code>SSID: Secure_Network
+Authentication: WPA2-PSK
+Encryption Type: AES
+PSK Pass Phrase: WirelessPassphrase123</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="implementation-video">
+            <h3>Implementation Walkthrough</h3>
+            <div class="video-container">
+                <!-- Video placeholder - Replace with actual video embed -->
+                <div class="video-placeholder">
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon" data-icon="play"></div>
+                        <p>Implementation Details Video</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testing" class="section alt">
+    <div class="container">
+        <div class="section-header">
+            <h2>Testing & Validation</h2>
+            <p>Comprehensive testing to verify security controls</p>
+        </div>
+        <div class="testing-methodology">
+            <div class="testing-intro">
+                <h3>Testing Methodology</h3>
+                <p>Our security implementation was validated through a series of tests designed to simulate real-world attack scenarios. Each test targeted specific vulnerabilities and security controls to verify their effectiveness.</p>
+            </div>
+            <div class="testing-grid">
+                <div class="testing-item">
+                    <div class="test-header">
+                        <h4>Heartbleed Testing</h4>
+                        <span class="test-result pass">PASSED</span>
+                    </div>
+                    <p>Simulated Heartbleed exploits were successfully detected and blocked by the ASA firewall before reaching protected resources.</p>
+                    <div class="test-details">
+                        <strong>Test Execution:</strong>
+                        <ul>
+                            <li>Created complex PDU to simulate Heartbleed attack</li>
+                            <li>Generated malformed TLS packets targeting port 443</li>
+                            <li>Monitored packet traversal through the network</li>
+                            <li>Verified packet drop at security checkpoint</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="testing-item">
+                    <div class="test-header">
+                        <h4>SQL Injection Testing</h4>
+                        <span class="test-result pass">PASSED</span>
+                    </div>
+                    <p>Database isolation effectively prevented SQL injection attempts with all unauthorized access blocked at the network layer.</p>
+                    <div class="test-details">
+                        <strong>Test Execution:</strong>
+                        <ul>
+                            <li>Attempted direct access to database from user zone</li>
+                            <li>Created SQL attack simulation PDU targeting port 1433</li>
+                            <li>Verified VLAN isolation between user and database zones</li>
+                            <li>Confirmed all injection attempts were blocked</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="testing-item">
+                    <div class="test-header">
+                        <h4>MITM Attack Testing</h4>
+                        <span class="test-result pass">PASSED</span>
+                    </div>
+                    <p>Port security successfully prevented MAC flooding attacks and unauthorized devices were blocked from connecting to the network.</p>
+                    <div class="test-details">
+                        <strong>Test Execution:</strong>
+                        <ul>
+                            <li>Connected rogue device to switch port</li>
+                            <li>Attempted to spoof MAC addresses</li>
+                            <li>Verified port security violation and shutdown</li>
+                            <li>Tested DHCP snooping and ARP inspection</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="testing-item">
+                    <div class="test-header">
+                        <h4>Route Poisoning Testing</h4>
+                        <span class="test-result pass">PASSED</span>
+                    </div>
+                    <p>ACL-based routing protection successfully blocked unauthorized routing updates, maintaining routing table integrity.</p>
+                    <div class="test-details">
+                        <strong>Test Execution:</strong>
+                        <ul>
+                            <li>Verified current routing table state</li>
+                            <li>Created false RIP update packets</li>
+                            <li>Sent rogue routing updates to RIP multicast address</li>
+                            <li>Confirmed ACLs blocked unauthorized updates</li>
+                            <li>Verified routing table remained unchanged</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="testing-item">
+                    <div class="test-header">
+                        <h4>AAA Testing</h4>
+                        <span class="test-result pass">PASSED</span>
+                    </div>
+                    <p>Centralized authentication works correctly with failed login attempts properly logged and tracked.</p>
+                    <div class="test-details">
+                        <strong>Test Execution:</strong>
+                        <ul>
+                            <li>Configured test credentials on AAA server</li>
+                            <li>Tested failed authentication with incorrect credentials</li>
+                            <li>Verified successful authentication with valid credentials</li>
+                            <li>Confirmed logging of all authentication attempts</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="testing-item">
+                    <div class="test-header">
+                        <h4>802.1X Authentication</h4>
+                        <span class="test-result limited">LIMITED</span>
+                    </div>
+                    <p>Port-based authentication was configured but testing was limited by simulation environment capabilities.</p>
+                    <div class="test-details">
+                        <strong>Limitation:</strong>
+                        <ul>
+                            <li>802.1X port-based authentication feature unavailable in Packet Tracer</li>
+                            <li>Configuration was validated conceptually</li>
+                            <li>Alternative controls were tested to provide similar protections</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="team" class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Team</h2>
+            <p>Meet the engineers behind this implementation</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-photo">
+                    <!-- Replace with actual team member photo -->
+                    <div class="photo-placeholder"></div>
+                </div>
+                <h3>Jose Antonio Escalante Lopez</h3>
+                <p class="member-title">Network Security Architect</p>
+                <p class="member-bio">Specialized in network design, security architecture, and defense-in-depth strategies. Led the implementation of firewall, routing, and authentication components.</p>
+            </div>
+            <div class="team-member">
+                <div class="member-photo">
+                    <!-- Replace with actual team member photo -->
+                    <div class="photo-placeholder"></div>
+                </div>
+                <h3>Cyrus Mokua</h3>
+                <p class="member-title">Cyber Defense Engineer</p>
+                <p class="member-bio">Expert in vulnerability assessment, penetration testing, and security validation. Responsible for security testing and performance optimization.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 0C8.954 0 0 8.954 0 20C0 31.046 8.954 40 20 40C31.046 40 40 31.046 40 20C40 8.954 31.046 0 20 0ZM20 6C24.418 6 28 9.582 28 14C28 18.418 24.418 22 20 22C15.582 22 12 18.418 12 14C12 9.582 15.582 6 20 6ZM20 34.4C15 34.4 10.56 32.12 7.8 28.44C7.86 24.22 16.2 21.8 20 21.8C23.78 21.8 32.14 24.22 32.2 28.44C29.44 32.12 25 34.4 20 34.4Z" fill="#00BCEB"/>
+                </svg>
+                <span>NetSecure</span>
+            </div>
+            <nav class="footer-nav">
+                <div class="footer-nav-column">
+                    <h4>Pages</h4>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#threats">Threats</a></li>
+                        <li><a href="#implementation">Implementation</a></li>
+                        <li><a href="#testing">Testing</a></li>
+                        <li><a href="#team">Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/JaelDS/Network-Design-Case-Study" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+                        <li><a href="https://github.com/JaelDS/Network-Design-Case-Study/blob/main/network-security-config.md" target="_blank" rel="noopener noreferrer">Configuration Guide</a></li>
+                        <li><a href="https://github.com/JaelDS/Network-Design-Case-Study/blob/main/README.md" target="_blank" rel="noopener noreferrer">Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h4>Testing</h4>
+                    <ul>
+                        <li><a href="https://github.com/JaelDS/Network-Design-Case-Study/blob/main/network-security-results.md" target="_blank" rel="noopener noreferrer">Test Results</a></li>
+                        <li><a href="https://github.com/JaelDS/Network-Design-Case-Study/blob/main/network-security-testing.md" target="_blank" rel="noopener noreferrer">Testing Guide</a></li>
+                        <li><a href="mailto:contact@netsecure.example" rel="noopener noreferrer">Contact Us</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 NetSecure. All rights reserved. Created for educational purposes.</p>
+            <div class="security-badge">
+                <span class="badge-icon" data-icon="secure"></span>
+                <span>Security Hardened Site</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
