@@ -424,16 +424,17 @@ header {
 }
 
 /* Logo Container for Partnership Logos */
+/* Update this in your styles.css file */
 .logo-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Change from column to row */
   align-items: center;
   justify-content: center;
   gap: var(--spacing-lg);
 }
 
 .partner-logo {
-  max-width: 200px;
+  max-width: 150px; /* Reduce from 200px to 150px */
   height: auto;
   transition: transform var(--transition-medium);
 }
@@ -865,18 +866,28 @@ header {
   background-color: var(--color-background-alt);
 }
 
+/* Add/update this in your styles.css file */
 .member-photo {
   width: 150px;
   height: 150px;
   border-radius: var(--border-radius-full);
   margin: 0 auto var(--spacing-md);
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.photo-placeholder {
+.member-photo img {
   width: 100%;
   height: 100%;
-  background: var(--color-primary);
+  object-fit: cover; /* This makes the image cover the entire circle */
+  object-position: center; /* Centers the image within the circle */
+}
+
+/* Remove this if it exists, as we don't need it anymore */
+.photo-placeholder {
+  display: none;
 }
 
 .member-title {
