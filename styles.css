@@ -971,17 +971,19 @@ footer {
   transition: color var(--transition-fast);
 }
 
-/* Add this to your CSS file */
-.footer-logo span.text {
-  color: white; /* For the default dark footer background */
+/* Add this to your CSS file to properly handle the text color in the logo */
+.logo span {
+  color: white; /* Default color for dark mode */
+  transition: color var(--transition-medium);
 }
 
-[data-theme="dark"] .footer-logo span.text {
-  color: white; /* Keep text white in dark mode */
+[data-theme="light"] .logo span {
+  color: var(--color-dark); /* Change to dark text in light mode */
 }
 
-[data-theme="light"] .footer-logo span.text {
-  color: white; /* Keep text white in light mode since footer stays dark */
+/* Also apply the same to the footer logo text if needed */
+.footer-logo span {
+  color: white; /* Always white since footer background stays dark */
 }
 
 .security-badge {
