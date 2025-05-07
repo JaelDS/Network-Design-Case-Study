@@ -1149,8 +1149,10 @@ Network Performance:
 
 *"In the realm of network security, paranoia is just good planning."*
 
-**Crafted with precision by**  
-[@JaelDS](https://github.com/JaelDS) & [@cyrusmokua](https://github.com/cyrusmokua)  
+**Crafted with precision by**
+
+[![@JaelDS](https://img.shields.io/badge/GitHub-@JaelDS-181717?style=flat&logo=github)](https://github.com/JaelDS)  [![@cyrusmokua](https://img.shields.io/badge/GitHub-@cyrusmokua-181717?style=flat&logo=github)](https://github.com/cyrusmokua)
+
 *Network Security Architects & Cyber Defense Engineers*
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
