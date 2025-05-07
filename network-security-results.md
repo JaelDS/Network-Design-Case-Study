@@ -86,7 +86,11 @@ This document presents the comprehensive test results of the security assessment
 - Source: PC3 (10.10.10.2)
 - Destination: Database Server (192.168.9.10)
 
+![Step 1 Testing](Testing/step1.png)
+
 #### Network Path Analysis
+
+![Heartbleed Simulation](Testing/simulation1.gif)
 The simulation demonstrates the packet successfully traversing:
 1. PC3 → Wireless Router → Core Network
 2. Core Network → ASA Firewall (Outside Interface)
@@ -95,6 +99,8 @@ The simulation demonstrates the packet successfully traversing:
 5. Switch → Database Server
 
 ### Security Validation Results
+
+![ASA Evidence](Testing/Evidence_ASA_Testing.png)
 
 #### ASA Access List Status
 
@@ -179,6 +185,9 @@ The simulation demonstrates:
 2. The packet enters the network path through the core infrastructure
 3. **Critical Finding:** The packet does not reach the database server
 4. Security controls successfully block the unauthorized database access attempt
+
+![SQL Injection Test](Testing/step2.png)
+![SQL Injection Simulation](Testing/simulation2.gif)
 
 ### Security Validation Results
 
@@ -280,6 +289,9 @@ The Layer 2 security controls have been properly implemented and are functioning
 ### Test Evidence
 When an unauthorized device (PC6) was connected to Switch0 in the Database Zone and attempted to communicate with devices in the User Access Zone, all packets failed to reach their destination despite having network connectivity. This confirms that proper network segmentation and access controls are preventing unauthorized cross-zone communication.
 
+![MITM Test Simulation](Testing/simulation3.gif)
+![MITM Test Additional Evidence](Testing/simulation3a.gif)
+
 ### Additional Tests Results
 
 #### DHCP Snooping Test
@@ -360,21 +372,9 @@ The test demonstrates that:
 - Only authorized routers can influence the routing table
 - The routing infrastructure maintains integrity against poisoning attempts
 
+![Route Poisoning Prevention Simulation](Testing/simulation4.gif)
+
 ### Test Status: PASSED
 The network security architecture successfully protected against route poisoning attempts through properly configured access control lists that permit RIP updates only from authorized sources.
 
 ---
-
-<div align="center">
-
-### 🔒 Security Testing Protocol
-*Comprehensive validation for enterprise network protection*
-
-**Developed by**  
-@JaelDS & @cyrusmokua
-
-[![Documentation](https://img.shields.io/badge/Docs-Complete-green.svg)](#)
-[![Tests](https://img.shields.io/badge/Tests-Completed-green.svg)](#)
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-blue.svg)](#)
-
-</div>
