@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define color palette -->
+  <defs>
+    <linearGradient id="gradientMain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00BCEB"/>
+      <stop offset="100%" stop-color="#0080AF"/>
+    </linearGradient>
+    <linearGradient id="gradientGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00BCEB" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00BCEB" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+      <feOffset dx="0.5" dy="0.5" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Central Network Design -->
+  <g transform="translate(150, 75)">
+    <!-- Central circle hub -->
+    <circle cx="0" cy="0" r="20" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="2" filter="url(#shadow)"/>
+    
+    <!-- Network nodes - inner ring -->
+    <circle cx="0" cy="-50" r="10" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1.5" filter="url(#shadow)"/>
+    <circle cx="43.3" cy="-25" r="10" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1.5" filter="url(#shadow)"/>
+    <circle cx="43.3" cy="25" r="10" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1.5" filter="url(#shadow)"/>
+    <circle cx="0" cy="50" r="10" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1.5" filter="url(#shadow)"/>
+    <circle cx="-43.3" cy="25" r="10" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1.5" filter="url(#shadow)"/>
+    <circle cx="-43.3" cy="-25" r="10" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1.5" filter="url(#shadow)"/>
+    
+    <!-- Network nodes - outer ring -->
+    <circle cx="0" cy="-80" r="7" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1" filter="url(#shadow)"/>
+    <circle cx="69.3" cy="-40" r="7" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1" filter="url(#shadow)"/>
+    <circle cx="69.3" cy="40" r="7" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1" filter="url(#shadow)"/>
+    <circle cx="0" cy="80" r="7" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1" filter="url(#shadow)"/>
+    <circle cx="-69.3" cy="40" r="7" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1" filter="url(#shadow)"/>
+    <circle cx="-69.3" cy="-40" r="7" fill="url(#gradientMain)" stroke="#00BCEB" stroke-width="1" filter="url(#shadow)"/>
+    
+    <!-- Connection lines - inner to central -->
+    <line x1="0" y1="0" x2="0" y2="-50" stroke="#00BCEB" stroke-width="2" stroke-opacity="0.6"/>
+    <line x1="0" y1="0" x2="43.3" y2="-25" stroke="#00BCEB" stroke-width="2" stroke-opacity="0.6"/>
+    <line x1="0" y1="0" x2="43.3" y2="25" stroke="#00BCEB" stroke-width="2" stroke-opacity="0.6"/>
+    <line x1="0" y1="0" x2="0" y2="50" stroke="#00BCEB" stroke-width="2" stroke-opacity="0.6"/>
+    <line x1="0" y1="0" x2="-43.3" y2="25" stroke="#00BCEB" stroke-width="2" stroke-opacity="0.6"/>
+    <line x1="0" y1="0" x2="-43.3" y2="-25" stroke="#00BCEB" stroke-width="2" stroke-opacity="0.6"/>
+    
+    <!-- Connection lines - inner to outer -->
+    <line x1="0" y1="-50" x2="0" y2="-80" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="43.3" y1="-25" x2="69.3" y2="-40" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="43.3" y1="25" x2="69.3" y2="40" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="0" y1="50" x2="0" y2="80" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="-43.3" y1="25" x2="-69.3" y2="40" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="-43.3" y1="-25" x2="-69.3" y2="-40" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    
+    <!-- Connection lines - inner ring connections -->
+    <line x1="0" y1="-50" x2="43.3" y2="-25" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="43.3" y1="-25" x2="43.3" y2="25" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="43.3" y1="25" x2="0" y2="50" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="0" y1="50" x2="-43.3" y2="25" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="-43.3" y1="25" x2="-43.3" y2="-25" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="-43.3" y1="-25" x2="0" y2="-50" stroke="#00BCEB" stroke-width="1.5" stroke-opacity="0.4"/>
+    
+    <!-- Data flow pulses along primary paths -->
+    <!-- Central to North -->
+    <circle r="2" fill="#FFFFFF" opacity="0.9">
+      <animate attributeName="cx" values="0;0" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="0;-50" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Central to Northeast -->
+    <circle r="2" fill="#FFFFFF" opacity="0.9">
+      <animate attributeName="cx" values="0;43.3" dur="2.3s" repeatCount="indefinite" begin="0.3s"/>
+      <animate attributeName="cy" values="0;-25" dur="2.3s" repeatCount="indefinite" begin="0.3s"/>
+      <animate attributeName="opacity" values="1;0" dur="2.3s" repeatCount="indefinite" begin="0.3s"/>
+    </circle>
+    
+    <!-- Central to Southeast -->
+    <circle r="2" fill="#FFFFFF" opacity="0.9">
+      <animate attributeName="cx" values="0;43.3" dur="2.5s" repeatCount="indefinite" begin="0.6s"/>
+      <animate attributeName="cy" values="0;25" dur="2.5s" repeatCount="indefinite" begin="0.6s"/>
+      <animate attributeName="opacity" values="1;0" dur="2.5s" repeatCount="indefinite" begin="0.6s"/>
+    </circle>
+    
+    <!-- Central to South -->
+    <circle r="2" fill="#FFFFFF" opacity="0.9">
+      <animate attributeName="cx" values="0;0" dur="2.2s" repeatCount="indefinite" begin="0.9s"/>
+      <animate attributeName="cy" values="0;50" dur="2.2s" repeatCount="indefinite" begin="0.9s"/>
+      <animate attributeName="opacity" values="1;0" dur="2.2s" repeatCount="indefinite" begin="0.9s"/>
+    </circle>
+    
+    <!-- Central to Southwest -->
+    <circle r="2" fill="#FFFFFF" opacity="0.9">
+      <animate attributeName="cx" values="0;-43.3" dur="2.4s" repeatCount="indefinite" begin="1.2s"/>
+      <animate attributeName="cy" values="0;25" dur="2.4s" repeatCount="indefinite" begin="1.2s"/>
+      <animate attributeName="opacity" values="1;0" dur="2.4s" repeatCount="indefinite" begin="1.2s"/>
+    </circle>
+    
+    <!-- Central to Northwest -->
+    <circle r="2" fill="#FFFFFF" opacity="0.9">
+      <animate attributeName="cx" values="0;-43.3" dur="2.1s" repeatCount="indefinite" begin="1.5s"/>
+      <animate attributeName="cy" values="0;-25" dur="2.1s" repeatCount="indefinite" begin="1.5s"/>
+      <animate attributeName="opacity" values="1;0" dur="2.1s" repeatCount="indefinite" begin="1.5s"/>
+    </circle>
+    
+    <!-- Outer data flow pulses -->
+    <!-- North to Far North -->
+    <circle r="1.5" fill="#FFFFFF" opacity="0.9">
+      <animate attributeName="cx" values="0;0" dur="1.5s" repeatCount="indefinite" begin="2s"/>
+      <animate attributeName="cy" values="-50;-80" dur="1.5s" repeatCount="indefinite" begin="2s"/>
+      <animate attributeName="opacity" values="1;0" dur="1.5s" repeatCount="indefinite" begin="2s"/>
+    </circle>
+    
+    <!-- NE to Far NE -->
+    <circle r="1.5" fill="#FFFFFF" opacity="0.9">
+      <animate attributeName="cx" values="43.3;69.3" dur="1.5s" repeatCount="indefinite" begin="2.3s"/>
+      <animate attributeName="cy" values="-25;-40" dur="1.5s" repeatCount="indefinite" begin="2.3s"/>
+      <animate attributeName="opacity" values="1;0" dur="1.5s" repeatCount="indefinite" begin="2.3s"/>
+    </circle>
+    
+    <!-- Digital pulse effects -->
+    <circle cx="0" cy="0" r="22" fill="none" stroke="#00BCEB" stroke-width="1" stroke-opacity="0.6">
+      <animate attributeName="r" values="20;30;20" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="stroke-opacity" values="0.6;0;0.6" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle cx="0" cy="-50" r="12" fill="none" stroke="#00BCEB" stroke-width="1" stroke-opacity="0.5">
+      <animate attributeName="r" values="10;15;10" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+      <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+    </circle>
+    
+    <circle cx="43.3" cy="-25" r="12" fill="none" stroke="#00BCEB" stroke-width="1" stroke-opacity="0.5">
+      <animate attributeName="r" values="10;15;10" dur="3s" repeatCount="indefinite" begin="1s"/>
+      <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+    
+    <circle cx="43.3" cy="25" r="12" fill="none" stroke="#00BCEB" stroke-width="1" stroke-opacity="0.5">
+      <animate attributeName="r" values="10;15;10" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+      <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+    </circle>
+    
+    <circle cx="0" cy="50" r="12" fill="none" stroke="#00BCEB" stroke-width="1" stroke-opacity="0.5">
+      <animate attributeName="r" values="10;15;10" dur="3s" repeatCount="indefinite" begin="2s"/>
+      <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite" begin="2s"/>
+    </circle>
+    
+    <circle cx="-43.3" cy="25" r="12" fill="none" stroke="#00BCEB" stroke-width="1" stroke-opacity="0.5">
+      <animate attributeName="r" values="10;15;10" dur="3s" repeatCount="indefinite" begin="2.5s"/>
+      <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite" begin="2.5s"/>
+    </circle>
+    
+    <circle cx="-43.3" cy="-25" r="12" fill="none" stroke="#00BCEB" stroke-width="1" stroke-opacity="0.5">
+      <animate attributeName="r" values="10;15;10" dur="3s" repeatCount="indefinite" begin="3s"/>
+      <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite" begin="3s"/>
+    </circle>
+  </g>
+</svg>
